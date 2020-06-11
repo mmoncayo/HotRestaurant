@@ -1,0 +1,30 @@
+{
+  "name": "hotrestaurant",
+  "version": "1.0.0",
+  "description": "Express app for reserving tables at a restaurant",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmoncayo/HotRestaurant.git"
+  },
+  "keywords": [
+    "hot",
+    "restaurant",
+    "express",
+    "ajax",
+    "html"
+  ],
+  "author": "Matt Moncayo",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mmoncayo/HotRestaurant/issues"
+  },
+  "homepage": "https://github.com/mmoncayo/HotRestaurant#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
