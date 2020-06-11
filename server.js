@@ -28,8 +28,8 @@ app.get("/tables", (req,res) => {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
-app.get("/makereservations", (req,res) => {
-  res.sendFile(path.join(__dirname, "makereservations.html"));
+app.get("/reserve", (req,res) => {
+  res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
 
@@ -40,7 +40,18 @@ app.get("/api/tables", (req,res) => {
 });
 
 app.post("/api/makereservation", (req,res) => {
-  return "yay!";
+  const table = req.body;
+  let reserved = false;
+  if (currentReservations.length === 5) {
+    waitingList.push(table);
+  }
+  else {
+    currentReservations.push(table);
+    reserved = true;
+  }
+  console.log("currentReservations", currentReservations);
+  console.log("waitingList", waitingList);
+  res.json(reserved);
 });
 
 

@@ -1,60 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tables</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Tables Page</title>
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
 
-    <div id="jumbotron NavBar">
-        <h1>Hot Restaurant</h1>
-        <h2>We only have 5 tables</h2>
-        <button id="make-reservations">Make reservations</button>
-        <button id="home">Home</button>
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-center"><span class="fa fa-fire"></span> Hot Restaurant</h1>
+      <hr>
+      <h2 class="text-center">Current Reservations and Waiting List</h2>
+      <br>
+
+      <div class="text-center">
+        <a href="/reserve"><button class="btn btn-lg btn-danger"><span class="fa fa-credit-card"></span> Make Reservation</button></a>
+        <a href="/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span></button></a>
+      </div>
     </div>
 
-    <div id="Current-reservations">
-        <h3 id=>Current Reservations</h3>
-        <div id="table1">
-            <h2>Table 1</h2>
-            <div id="table1-info">
-                <p>ID:</p>
-                <p>Name:</p>
-                <p>Email:</p>
-                <p>Phone:</p>
-            </div>
+    <div class="row">
+      <div class="col-lg-12">
+
+        <!-- Current Tables in Use -->
+        <div class="card">
+          <div class="card-header">
+            <h4>Current Reservations</h4>
+          </div>
+          <div class="card-body">
+            <ul id="tableList" class="list-group"></ul>
+          </div>
         </div>
 
-        <div id="table2">
-            <h2>Table 2</h2>
-            <div id="table2-info">
-                <p>ID:</p>
-                <p>Name:</p>
-                <p>Email:</p>
-                <p>Phone:</p>
-            </div>
+        <!-- Waiting List Card -->
+        <div class="card mt-4">
+          <div class="card-header">
+            <h4>Waiting List</h4>
+          </div>
+          <div class="card-body">
+            <ul id="waitList" class="list-group"></ul>
+          </div>
         </div>
-
-        <div id="table3">
-            <h2>Table 3</h2>
-            <div id="table3-info">
-                <p>ID:</p>
-                <p>Name:</p>
-                <p>Email:</p>
-                <p>Phone:</p>
-            </div>
-        </div>
-
-
+      </div>
     </div>
 
-    <footer>
-        <a href="">API Table Link</a>   
-        <a href="">API Wait List</a>
+
+    <footer class="footer mt-4">
+      <div class="container">
+        <p>Control Panel</p>
+        <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API
+            Wait List</a>
+      </div>
     </footer>
 
+  </div>
+
 </body>
+
+
+<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS LOADED FROM OUR SERVER -->
+<script type="text/javascript">
+
+  // In this code, jQuery is used to "download" the data from our server
+  // We then dynamically display this content in our table. This is very similar to the group projects you just completed.
+  // It's also very similar to the NYT search application. In fact, I copied a ton of code from there.
+
+  $(document).ready(() => {
+    $.get("/api/tables", (data) => {
+      console.log(data);
+      data.currentReservations.forEach((element,index) => {
+        const table = $("<div>");
+        const head = $("<h3>").text(`Table #${index+1}`).addClass("card-header");
+        const name = $("<h3>").text(`Name: ${element.name}`);
+        const phone = $("<h3>");
+        const email = $("<h3>");
+        const id = $("<h3>");
+        table.append(head,name,phone,email,id);
+        $("#tableList").append(table);
+      });
+
+      data.waitingList.forEach((element,index) => {
+        const table = $("<div>");
+        const head = $("<h3>").text(`Table #${index+1}`).addClass("card-header");
+        const name = $("<h3>").text(`Name: ${element.name}`);
+        const phone = $("<h3>");
+        const email = $("<h3>");
+        const id = $("<h3>");
+        table.append(head,name,phone,email,id);
+        $("#waitList").append(table);
+      });
+      
+    });
+  });
+
+
+  // Run Queries!
+  // ==========================================
+  //runTableQuery();
+  //runWaitListQuery();
+
+
+</script>
+
 </html>
