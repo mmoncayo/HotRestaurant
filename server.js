@@ -44,10 +44,12 @@ app.post("/api/makereservation", (req,res) => {
   let reserved = false;
   if (currentReservations.length === 5) {
     waitingList.push(table);
+    console.log("waitlisted!")
   }
   else {
     currentReservations.push(table);
     reserved = true;
+    console.log("reserved!")
   }
   console.log("currentReservations", currentReservations);
   console.log("waitingList", waitingList);

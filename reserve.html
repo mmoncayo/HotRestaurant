@@ -99,7 +99,11 @@
     }
 
     $.post("/api/makereservation", table).then((data)=>{
-      alert("done!");
+      if(data === true){
+        alert("Table reserved!");
+      } else {
+        alert("Waitlisted!");
+      }
     });
   });
   });
