@@ -82,9 +82,9 @@
         const table = $("<div>");
         const head = $("<h3>").text(`Table #${index+1}`).addClass("card-header");
         const name = $("<h3>").text(`Name: ${element.name}`);
-        const phone = $("<h3>");
-        const email = $("<h3>");
-        const id = $("<h3>");
+        const phone = $("<h3>").text(`Phone Number: ${element.phone}`);
+        const email = $("<h3>").text(`E-mail: ${element.email}`);
+        const id = $("<h3>").text(`Unique ID: ${element.id}`);
         table.append(head,name,phone,email,id);
         $("#tableList").append(table);
       });
@@ -93,9 +93,9 @@
         const table = $("<div>");
         const head = $("<h3>").text(`Table #${index+1}`).addClass("card-header");
         const name = $("<h3>").text(`Name: ${element.name}`);
-        const phone = $("<h3>");
-        const email = $("<h3>");
-        const id = $("<h3>");
+        const phone = $("<h3>").text(`Phone: ${element.phone}`);
+        const email = $("<h3>").text(`Email: ${element.email}`);
+        const id = $("<h3>").text(`Unique ID: ${element.id}`);
         table.append(head,name,phone,email,id);
         $("#waitList").append(table);
       });
